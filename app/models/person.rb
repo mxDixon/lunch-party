@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
 
-	#im a comment
+	attr_accessor :preferences, :status, :name
+	
 end
