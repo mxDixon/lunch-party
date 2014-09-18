@@ -5,11 +5,13 @@ class QueueManager
     parties = Party.all
 
     pool.each do |person|
+      next if person.assigned
+
       possible_parties = find_parties(parties, person.preferences[0])
+      puts possible_parties.length
 
       if possible_parties.length > 0
         puts "found possible parties"
-        puts possible_parties.length
         possible_parties[0].people << person
         possible_parties[0].save
       else
@@ -18,7 +20,7 @@ class QueueManager
         prt.people << person
         prt.preference = person.preferences[0]
 
-        puts "this is party #{prt.to_yaml}"
+        puts "this is new party #{prt.to_yaml}"
         prt.save
         parties << prt
       end
