@@ -8,7 +8,9 @@ class QueueManager
       possible_parties = find_parties(parties, person.preferences[0])
 
       if possible_parties.length > 0
-        possible_parties[0] << person
+        puts "found possible parties"
+        puts possible_parties.length
+        possible_parties[0].people << person
         possible_parties[0].save
       else
         puts "this is person preferences #{person.preferences}"

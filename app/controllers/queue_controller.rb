@@ -13,8 +13,12 @@ class QueueController < ApplicationController
     peep.name = params[:person][:name]
     peep.save
     puts "this is id #{peep.id}"
+    puts peep.to_yaml
 
     QueueManager.generate_parties
+
+    puts "people size = #{Person.count}"
+    puts "party size = #{Party.count}"
 
   end
 
