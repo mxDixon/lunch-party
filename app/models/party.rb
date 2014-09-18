@@ -1,6 +1,5 @@
 class Party < ActiveRecord::Base
 	has_many :people
-	attr_accessor :preference, :status, :min_size, :max_size, :people
 
   def initialize args
     people = args[:people]
