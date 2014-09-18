@@ -1,2 +1,9 @@
-<h1>Queue#index</h1>
-<p>Find me in app/views/queue/index.html.erb</p>
+<h1>Select your categories here</h1>
+<% form_tag %>
+
+<%= select('person', 'preferences', FoodCats.catlist) %>
+<%= select('person', 'preferences', FoodCats.categories) %>
+<%= select('person', 'preferences', FoodCats.categories) %>
+<%= submit %>
+
+<% form_tag %>

@@ -1,3 +1,5 @@
+require 'foodcats'
+
 class QueueController < ApplicationController
   def index
   end
