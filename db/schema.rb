@@ -11,16 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918123354) do
+ActiveRecord::Schema.define(version: 20140918211216) do
 
   create_table "parties", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "preference"
+    t.string   "status"
+    t.string   "min_size"
+    t.string   "max_size"
   end
 
   create_table "people", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "party_id"
+    t.text     "preferences"
+    t.string   "status"
+    t.string   "name"
+    t.boolean  "assigned"
   end
+
+  add_index "people", ["party_id"], name: "index_people_on_party_id"
 
 end
