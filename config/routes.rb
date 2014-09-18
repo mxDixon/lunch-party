@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'queue/index'
+
+  get 'queue/wait'
+
+  get 'queue/party'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
