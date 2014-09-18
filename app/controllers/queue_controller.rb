@@ -9,7 +9,9 @@ class QueueController < ApplicationController
     pref = params[:person]
     peep = Person.new
     peep.preferences = [pref[:pref1], pref[:pref2], pref[:pref3]]
-    peep.name = params[:person][:name]    
+    peep.name = params[:person][:name]
+
+
   end
 
   def wait
