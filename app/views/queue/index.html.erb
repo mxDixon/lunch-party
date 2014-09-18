@@ -4,6 +4,7 @@
     <%= select('person', 'pref1', FoodCats.catlist) %>
     <%= select('person', 'pref2', FoodCats.catlist) %>
     <%= select('person', 'pref3', FoodCats.catlist) %>
+    <%= text_field(:person, :name, size: 20) %>
     <%= submit_tag %>
 
 <% end %>
