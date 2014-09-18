@@ -11,7 +11,12 @@ class QueueManager
         possible_parties[0] << person
         possible_parties[0].save
       else
-        prt = Party.new({:people => person, :preference => person.preferences[0]})
+        puts "this is person preferences #{person.preferences}"
+        prt = Party.new
+        prt.people << person
+        prt.preference = person.preferences[0]
+
+        puts "this is party #{prt.to_yaml}"
         prt.save
         parties << prt
       end
