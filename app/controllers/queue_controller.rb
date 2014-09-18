@@ -9,7 +9,7 @@ class QueueController < ApplicationController
     #todo do the person create and enqueue
     pref = params[:person]
     peep = Person.new
-    peep.preferences = [pref[:pref1], pref[:pref2], pref[:pref3]]
+    peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
     peep.name = params[:person][:name]
     peep.save
     puts "this is id #{peep.id}"
