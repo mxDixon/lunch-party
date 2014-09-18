@@ -4,7 +4,6 @@ class FoodCats
   end
 
   def self.catlist
-    temp = self.categories.collect {|c| [categories.index(c), c]}
-    temp
+    self.categories.collect {|c| [c, categories.index(c)]}
   end
 end
