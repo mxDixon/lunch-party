@@ -15,7 +15,7 @@ class QueueController < ApplicationController
     puts "this is id #{peep.id}"
     puts peep.to_yaml
 
-    QueueManager.generate_parties
+    QueueManager.generate_parties(Person.all, Party.all)
 
     puts "people size = #{Person.count}"
     puts "party size = #{Party.count}"
