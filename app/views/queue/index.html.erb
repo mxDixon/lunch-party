@@ -1,9 +1,9 @@
 <h1>Select your categories here</h1>
 <%= form_tag '/queue/personify' do %>
 
-    <%= select('person', 'pref1', FoodCats.catlist) %>
-    <%= select('person', 'pref2', FoodCats.catlist) %>
-    <%= select('person', 'pref3', FoodCats.catlist) %>
+    <%= select('person', 'pref1', FoodCats.catlist) %><br/>
+    <%= select('person', 'pref2', FoodCats.catlist) %><br/>
+    <%= select('person', 'pref3', FoodCats.catlist) %><br/>
     <%= text_field(:person, :name, size: 20) %>
     <%= submit_tag %>
 

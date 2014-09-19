@@ -13,13 +13,19 @@ class QueueController < ApplicationController
     peep.name = params[:person][:name]
     peep.save
     puts "this is id #{peep.id}"
-    puts peep.to_yaml
 
     QueueManager.generate_parties(Person.all, Party.all)
 
     puts "people size = #{Person.count}"
     puts "party size = #{Party.count}"
 
+    puts peep.to_yaml
+
+    if Person.find(peep.id).assigned
+      redirect_to action: 'party'
+    else
+      redirect_to action: 'wait'
+    end
   end
 
   def wait

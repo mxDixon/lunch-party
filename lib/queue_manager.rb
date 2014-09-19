@@ -12,10 +12,14 @@ class QueueManager
       if matched_party.length > 0
         puts "found a party"
         matched_party[0].people << person
+        person.assigned = true
+        person.save
         matched_party[0].save
       else
         prt = Party.new
         prt.people << person
+        person.assigned = true
+        person.save
         prt.preference = person.preferences[pref]
         prt.save
         puts "new party #{prt.to_yaml}"
@@ -25,7 +29,7 @@ class QueueManager
     end
 
     refine_orphans
-    
+
     Party.all.each do |p|
       puts "party #{p.id}"
       p.people.each do |n|
@@ -36,31 +40,56 @@ class QueueManager
 
   private
 
-  def refine_orphans
-    sadboys = []
+  def self.refine_orphans
 
+    #find sadboys
+    sadboys = []
     Party.all.each do |prty|
-      sadboys << prty.people.first if prty.people.size == 1
-      prty.destroy
+      if prty.people.size == 1
+        sadboys << prty.people.first
+        prty.destroy
+      end
     end
 
+    #set sadboys unassigned because they're orphans
+    sadboys.each do |sb|
+      sb.assigned = false
+      sb.save
+    end
+
+    #twosize = []
+    #Party.all.each do |prty|
+    #  twosize << prty if prty.people.size == 2
+    #end
+
+    #find homes for sadboys with second pref
     find_homes(sadboys, 1)
 
+    #remove sadboys if they found home
     sadboys.each do |sadboy|
       sadboys.delete(sadboy) if sadboy.assigned
     end
 
+    #find homes for sadboys with third pref
     find_homes(sadboys, 2)
 
+    #remove sadboys if they found home again
+    sadboys.each do |sadboy|
+      sadboys.delete(sadboy) if sadboy.assigned
+    end
+
+    #return sadboys so we know who's left
+    sadboys
   end
 
-  def find_homes(orphans, preference)
+  def self.find_homes(orphans, preference)
 
     orphans.each do |orphan|
       home = Party.where(preference: orphan.preferences[preference])
       unless home.empty?
-        home[0] << orphan
+        home[0].people << orphan
         orphan.assigned = true
+        orphan.save
       end
     end
   end
