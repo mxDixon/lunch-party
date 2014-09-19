@@ -1,18 +1,30 @@
 <div class="selectContainer">
-<h1 class="pageTitle">Let's get lunch!</h1>
+	<h1 class="pageTitle">Let's get lunch!</h1>
 	<tbody>
-	   <% @bundleCollection.each do |b, index|%>
+	   <% @bundleCollection.each do |b|%>
 	   <tr>
 	    <div style="margin-top: 5px;"><span>Party Id = </span><%= b[:prtId] %></div>
 	    <div style="margin-top: 5px;"><span>Party Preference = </span><%= b[:pref] %></div>
-	    <div style="margin-top: 5px;"><span>Party Members: </span><%= b[:members].to_yaml %></div>
-	    <div>++++++++++++++++</div>
+	    <div class="needJS" style="margin-top: 5px;"><span>Party Members: </span><%= b[:members].to_yaml %></div>
+	    <div style="height: 5px; width: 100%; background-color: #000000;"></div>
 
 	   </tr>
 	   <% end %>
 	</tbody>
 	<div style="height: 20px;"></div>
-	   <div style="margin-top: 50px;" >
-	   	 ha
-	   </div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+jQuery.noConflict();
+$('.needJS').each(function(){
+	oldText = $(this).text();
+	newText = oldText.replace(/\n/g, "");
+	newText = newText.replace(/\//g, "");
+	newText = newText.replace(/---- !rubyobject:Person  attributes:    /g, "");
+	newText = newText.replace(/    id: - !rubyobject:Person  attributes:    /g, ",");
+	newText = newText.replace(/    id:/g,"");
+	newText = newText.replace(/name:/g, "");
+	$(this).text(newText);
+});
+</script>
