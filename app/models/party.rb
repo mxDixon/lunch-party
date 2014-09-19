@@ -6,5 +6,9 @@ class Party < ActiveRecord::Base
     5
   end
 
+  def min_size
+    3
+  end
+
 
 end
