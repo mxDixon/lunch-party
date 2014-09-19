@@ -2,10 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html {
+body {
   background-image: url('logo1.jpg');
 }
 
 select {
-  class: ''
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+}
+
+.pageTitle {
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+}
+
+div.selectContainer {
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+
+
+input[type="submit"]{
+	display: none;
 }

@@ -2,6 +2,9 @@ require 'foodcats'
 require 'queue_manager'
 
 class QueueController < ApplicationController
+  @bundleCollection
+  @test
+
   def index
   end
 
@@ -29,8 +32,28 @@ class QueueController < ApplicationController
   end
 
   def wait
+    peopleIds = Person.all.collect{|obj| obj.id}
+    for i in peopleIds
+      currentPerson = Person.fin(i)
+      if currentPerson.assigned
+      end
+    end
   end
 
   def party
+    @bundleCollection = Array.new
+    @test = Array.new
+    partyIds = Party.all.collect { |obj| obj.id }
+
+    for i in partyIds
+      currentParty = Party.find(i)
+      currentPreference = currentParty.preference
+      currentMembers = Person.where(party_id: i).select(:name)
+      currentBundle = {prtId: i, pref: currentPreference, members: currentMembers}
+      @bundleCollection << currentBundle
+    end
+
+
+
   end
 end

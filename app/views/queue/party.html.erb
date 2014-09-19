@@ -1,2 +1,18 @@
-<h1>Queue#party</h1>
-<p>Find me in app/views/queue/party.html.erb</p>
+<div class="selectContainer">
+<h1 class="pageTitle">Let's get lunch!</h1>
+	<tbody>
+	   <% @bundleCollection.each do |b, index|%>
+	   <tr>
+	    <div style="margin-top: 5px;"><span>Party Id = </span><%= b[:prtId] %></div>
+	    <div style="margin-top: 5px;"><span>Party Preference = </span><%= b[:pref] %></div>
+	    <div style="margin-top: 5px;"><span>Party Members: </span><%= b[:members].to_yaml %></div>
+	    <div>++++++++++++++++</div>
+
+	   </tr>
+	   <% end %>
+	</tbody>
+	<div style="height: 20px;"></div>
+	   <div style="margin-top: 50px;" >
+	   	 ha
+	   </div>
+</div>
