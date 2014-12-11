@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   post 'party/:id' => 'party#confirm'
 
+  get 'party/:id/confirm/:personid' => 'party#confirm'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
