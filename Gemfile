@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 #bootstrapps
 gem 'twitter-bootstrap-rails'
 
+gem 'lograge'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
