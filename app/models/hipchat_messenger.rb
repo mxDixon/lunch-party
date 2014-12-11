@@ -22,7 +22,7 @@ class HipchatMessenger
                                :body => msg,
                                :headers => {'content-type' => 'text/plain'}
       )
-      puts "#{z} missed a message " + response.request +  " " + response.to_yaml if response.code != 204
+      puts "#{z} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
     end
   end
 

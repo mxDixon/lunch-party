@@ -12,19 +12,15 @@ class QueueController < ApplicationController
     peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
     peep.name = params[:person][:name]
     peep.save
-    puts "this is id #{peep.id}"
+
+    error = false
 
     QueueManager.generate_parties(Person.all, Party.all)
 
-    puts "people size = #{Person.count}"
-    puts "party size = #{Party.count}"
-
-    puts peep.to_yaml
-
-    if Person.find(peep.id).exists?
-      redirect_to action: 'success'
-    else
+    if error
       redirect_to action: 'error'
+    else
+      redirect_to action: 'success'
     end
   end
 

@@ -1,14 +1,14 @@
 <h1>Your party is ready!</h1>
 <ul>
 <% @party.people.each do |p| %>
-    <li><% p.name %> is <% 'ready' if p.ready?; 'not ready' unless p.ready? %></li>
+    <li><%= p.name %> is <%= if p.ready?; 'has confirmed.'; else 'has not responded.'; end %></li>
 <% end %>
 </ul>
 <br/>
 <p>Enter your id to confirm:</p>
-<% form_tag '/party/confirm', :name => 'idForm', :onsubmit => 'return validateId()' do %>
-    <% text_field(:person, :id) %>
-    <% submit_tag %>
+<%= form_tag '/party/confirm', :name => 'idForm', :onsubmit => 'return validateId()' do %>
+    <%= text_field(:person, :name, size: 20) %>
+    <%= submit_tag %>
 <% end %>
 
 <script>

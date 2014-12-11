@@ -3,10 +3,6 @@ class Party < ActiveRecord::Base
 
   attr_reader :ready, :zombies
 
-  def initialize
-    @ready = false
-  end
-
   def max_size
     #people.max_by(|person| person.seats)
     5
@@ -16,9 +12,17 @@ class Party < ActiveRecord::Base
     3
   end
 
+  def happy?
+    if people.length > min_size
+      true
+    else
+      false
+    end
+  end
+
   def ready?
-    if @ready
-      @ready
+    if self.status == 'ready'
+      true
     else
       check_ready
     end
@@ -28,7 +32,7 @@ class Party < ActiveRecord::Base
     @zombies = []
     people.each do |p|
       @zombies << p.name
-      p.delete
+      p.destroy
     end
   end
 
@@ -42,6 +46,8 @@ class Party < ActiveRecord::Base
     if peeps_ready == people.length
       @ready = true
       kill_the_people
+      self.status = 'ready'
+      self.save
       true
     else
       false

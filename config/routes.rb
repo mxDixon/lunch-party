@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   get 'queue/index'
 
-  get 'queue/wait'
+  get 'queue/success'
 
-  get 'queue/party'
+  get 'queue/error'
 
   post 'queue/personify'
 

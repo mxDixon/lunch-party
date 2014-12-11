@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918211216) do
+ActiveRecord::Schema.define(version: 20141211230600) do
 
   create_table "parties", force: true do |t|
     t.datetime "created_at"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140918211216) do
     t.string   "status"
     t.string   "name"
     t.boolean  "assigned"
+    t.boolean  "has_confirmed"
   end
 
   add_index "people", ["party_id"], name: "index_people_on_party_id"
