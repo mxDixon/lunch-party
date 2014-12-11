@@ -31,7 +31,7 @@ class QueueManager
     refine_orphans
 
     Party.all.each do |p|
-      HipchatMessenger.message_party_people(p)
+      HipchatMessenger.party_ready(p)
       puts "party #{p.id}"
       p.people.each do |n|
         puts "#{n.name} #{n.id}"
