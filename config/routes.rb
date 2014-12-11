@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'queue/index'
+  root 'queue#index'
 
   get 'queue/index'
 
