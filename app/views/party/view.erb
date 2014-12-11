@@ -1,0 +1,21 @@
+<h1>Your party is ready!</h1>
+<p>Enter your id to confirm:</p>
+<% form_tag '/party/confirm', :name => 'idForm', :onsubmit => 'return validateId()' do %>
+    <% text_field(:person, :id) %>
+    <% submit_tag %>
+<% end %>
+
+<script>
+    function validateId() {
+        var x = document.forms["idForm"]["person_name"].value;
+        if (x == null || x == "") {
+            alert("ID can't be blank");
+            return false;
+        }
+
+        if (x.charAt(0) != '@'){
+            alert("IDs start with @");
+            return false;
+        }
+    }
+</script>

@@ -21,16 +21,16 @@ class QueueController < ApplicationController
 
     puts peep.to_yaml
 
-    if Person.find(peep.id).assigned
-      redirect_to action: 'party'
+    if Person.find(peep.id).exists?
+      redirect_to action: 'success'
     else
-      redirect_to action: 'wait'
+      redirect_to action: 'error'
     end
   end
 
-  def wait
+  def success
   end
 
-  def party
+  def error
   end
 end

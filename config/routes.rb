@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'queue/index'
+
   get 'queue/index'
 
   get 'queue/wait'
@@ -6,6 +9,10 @@ Rails.application.routes.draw do
   get 'queue/party'
 
   post 'queue/personify'
+
+  get 'party/:id' => 'party#view'
+
+  post 'party/:id' => 'party#confirm'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
