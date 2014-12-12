@@ -1,7 +1,23 @@
-<h1>Welcome to Lunchparty Hub</h1>
-<% count = Person.count %>
-<p>There are currently <%= count.to_s + ' person'.pluralize(count) %> in queue.</p>
-<br/>
-<p>If you would like to join, click <%= link_to 'here', controller: 'queue', action: 'add' %>.</p>
-<br/>
-<p>If you're currently in the queue and need to drop out, click <%= link_to 'here', controller: 'queue', action: 'remove' %>.</p>
+<div class="jumbotron">
+  <h1>Welcome to Lunchparty</h1>
+  <p>Lunchparty is an app to pair you with other users with similar taste in food. Just enter your hipchat user id (@user) and top food preferences, and you'll be entered into a pool of potential lunch friends.</p>
+</div>
+<div class="container">
+  <% count = Person.count %>
+  <div class="row">
+    <div class="col-lg-8">
+      <h2>There are currently <%= count.to_s + ' person'.pluralize(count) %> in queue.</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <p>If you would like to join.</p>
+      <%= link_to "<button type='button' class='btn btn-lg btn-success'>Join</button>".html_safe, controller: 'queue', action: 'add', class: 'btn btn-lg btn-success' %>
+    </div>
+    <div class="col-lg-4">
+      <p>If you're currently in the queue and need to drop out.</p>
+      <%= link_to "<button type='button' class='btn btn-lg btn-danger'>Drop</button>".html_safe, controller: 'queue', action: 'remove' %>
+    </div>
+  </div>
+</div>
+
