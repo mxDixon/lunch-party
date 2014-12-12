@@ -16,7 +16,7 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-set :output, {:error => 'error.log', :standard => 'cron.log'}
+set :output, {:error => './log/error.log', :standard => './log/cron.log'}
 
 every 10.minutes do
   runner "QueueManager.clear_and_generate"
