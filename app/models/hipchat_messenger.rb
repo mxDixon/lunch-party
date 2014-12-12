@@ -8,7 +8,7 @@ class HipchatMessenger
                                :body => self.ready_message(party, peep),
                                :headers => {'content-type' => 'text/plain'}
       )
-      puts "#{peep} missed a message " + response.request +  " " + response.to_yaml if response.code != 204
+      puts "#{peep} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
     end
   end
 
