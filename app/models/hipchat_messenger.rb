@@ -34,7 +34,7 @@ class HipchatMessenger
   private
 
   def self.ready_message(party, person)
-    "Your party has formed! Click here localhost:3000/party/#{party.id}/confirm/#{person.id} to confirm!"
+    "Your party has formed! Click here https://lunchparty.herokuapp.com/party/#{party.id}/confirm/#{person.id} to confirm!"
   end
 
   def self.leave_message
