@@ -5,3 +5,7 @@ ERROR:  syntax error at or near "." at character 33
 STATEMENT:  CREATE DATABASE "db/development"."postgres" ENCODING = 'utf8'
 ERROR:  syntax error at or near "." at character 26
 STATEMENT:  CREATE DATABASE "db/test"."postgres" ENCODING = 'utf8'
+ERROR:  invalid input syntax for type boolean: "name" at character 42
+STATEMENT:  SELECT  "people".* FROM "people"  WHERE ('name') LIMIT 1
+ERROR:  invalid input syntax for type boolean: "name" at character 42
+STATEMENT:  SELECT  "people".* FROM "people"  WHERE ('name') LIMIT 1
