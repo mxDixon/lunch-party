@@ -19,7 +19,6 @@ class QueueController < ApplicationController
   def destroy
     begin
       peeps = Person.where(name: params[:person][:name])
-      peeps.to_yaml
       peeps.first.destroy
       redirect_to action: 'bye'
     rescue ActiveRecord::RecordNotUnique

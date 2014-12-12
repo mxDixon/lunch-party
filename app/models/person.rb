@@ -11,6 +11,7 @@ class Person < ActiveRecord::Base
     self.assigned = false
     self.party_id = nil
     self.has_confirmed = false
+    save
   end
 
 end

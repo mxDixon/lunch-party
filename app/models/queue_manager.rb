@@ -22,38 +22,20 @@ class QueueManager
       next if person.assigned
 
       matched_party = Party.where(preference: person.preferences[pref])
-      puts "matched party is #{matched_party.class} that is #{matched_party}"
+
       if matched_party.length > 0
-        puts "found a party"
-        matched_party[0].people << person
-        person.assigned = true
-        person.save
-        matched_party[0].save
+        matched_party[0].add(person)
       else
         prt = Party.new
-        prt.people << person
-        person.assigned = true
-        person.save
         prt.preference = person.preferences[pref]
-        prt.save
-        puts "new party #{prt.to_yaml}"
-
+        puts "adding #{person.name} to party #{prt.id}"
+        prt.add(person)
+        puts "party people after: #{prt.people.to_yaml}"
         parties << prt
       end
     end
 
-    refine_orphans
-
-    Party.all.each do |p|
-      if p.happy?
-        puts "party #{p.id} is happy and should be sending ready msg"
-        HipchatMessenger.party_ready(p)
-      end
-      puts "party #{p.id}"
-      p.people.each do |n|
-        puts "#{n.name} #{n.id}"
-      end
-    end
+    refine_orphans(pref)
   end
 
   def self.timeout_parties
@@ -80,7 +62,7 @@ class QueueManager
     end
   end
 
-  def self.refine_orphans
+  def self.refine_orphans(pref)
 
     #find sadboys
     sadboys = []
@@ -93,43 +75,41 @@ class QueueManager
 
     #set sadboys unassigned because they're orphans
     sadboys.each do |sb|
-      sb.assigned = false
+      sb.unassign
       sb.save
     end
 
-    #twosize = []
-    #Party.all.each do |prty|
-    #  twosize << prty if prty.people.size == 2
-    #end
-
-    #find homes for sadboys with second pref
-    find_homes(sadboys, 1)
-
-    #remove sadboys if they found home
-    sadboys.each do |sadboy|
-      sadboys.delete(sadboy) if sadboy.assigned
+    if pref < 1
+      generate_parties(sadboys, Party.all, pref+1)
+    else
+      last_resort(sadboys)
+      puts "blasting"
+      blast
     end
-
-    #find homes for sadboys with third pref
-    find_homes(sadboys, 2)
-
-    #remove sadboys if they found home again
-    sadboys.each do |sadboy|
-      sadboys.delete(sadboy) if sadboy.assigned
-    end
-
-    #return sadboys so we know who's left
-    sadboys
   end
 
-  def self.find_homes(orphans, preference)
+  def self.last_resort(sadboys)
+    sadboys.each do |sb|
+      matched_parties = Party.where(:preference => sb.preferences)
+      parties = matched_parties.to_a
+      parties.map! do |p|
+        p if p.people.length < p.max_size
+      end.compact
+      puts "matched parties for last resort #{parties.to_yaml}"
 
-    orphans.each do |orphan|
-      home = Party.where(preference: orphan.preferences[preference])
-      unless home.empty?
-        home[0].people << orphan
-        orphan.assigned = true
-        orphan.save
+      parties.first.add(sb) if parties.length > 0
+    end
+  end
+
+  def self.blast
+    Party.all.each do |p|
+      if p.happy?
+        puts "party #{p.id} is happy and should be sending ready msg"
+        HipchatMessenger.party_ready(p)
+      end
+      puts "party #{p.id}"
+      p.people.each do |n|
+        puts "#{n.name} #{n.id}"
       end
     end
   end

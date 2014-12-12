@@ -53,4 +53,11 @@ class Party < ActiveRecord::Base
     end
   end
 
+  def add(person)
+    person.assigned = true
+    person.save
+    people << person
+    save
+  end
+
 end
