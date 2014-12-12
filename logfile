@@ -10,3 +10,5 @@ STATEMENT:  SELECT  "people".* FROM "people"  WHERE ('name') LIMIT 1
 ERROR:  invalid input syntax for type boolean: "name" at character 42
 STATEMENT:  SELECT  "people".* FROM "people"  WHERE ('name') LIMIT 1
 FATAL:  database "db/production.postgres" does not exist
+FATAL:  database "db/production.postgres" does not exist
+FATAL:  database "db/production.postgres" does not exist

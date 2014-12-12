@@ -2,7 +2,6 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
-
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"
@@ -17,12 +16,14 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
+set :output, {:error => 'error.log', :standard => 'cron.log'}
+
 every 10.minutes do
-  runner 'QueueManager.clear_and_generate'
+  runner "QueueManager.clear_and_generate"
 end
 
 every '7-59/10 * * * *' do
-  runner 'QueueManager.timeout_parties'
+  runner "QueueManager.timeout_parties"
 end
 
 # Learn more: http://github.com/javan/whenever
