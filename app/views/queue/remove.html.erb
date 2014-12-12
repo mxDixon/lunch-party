@@ -1,0 +1,22 @@
+<h1>Enter your HipChat @id</h1>
+<%= form_tag '/queue/destroy', :name => 'idForm', :onsubmit => 'return validateId()' do %>
+    <%= text_field(:person, :name, size: 20) %>
+    <br/>
+    <%= submit_tag 'Remove' %>
+<% end %>
+
+
+<script>
+    function validateId() {
+        var x = document.forms["idForm"]["person_name"].value;
+        if (x == null || x == "") {
+            alert("ID can't be blank");
+            return false;
+        }
+
+        if (x.charAt(0) != '@'){
+            alert("IDs start with @");
+            return false;
+        }
+    }
+</script>

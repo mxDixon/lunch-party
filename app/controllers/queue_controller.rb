@@ -6,7 +6,24 @@ class QueueController < ApplicationController
   end
 
   def add
+  end
 
+  def remove
+  end
+
+  def destroy
+    begin
+      peep = Person.find_by(:name => params[:person][:name])
+      peep.destroy
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to action: 'add', alert: 'That user is already in queue!'
+    rescue => e
+      Logger.log('EXCEPTION::')
+      Logger.log(e.to_yaml)
+      redirect_to action: 'error'
+    end
+
+    redirect_to action: 'bye'
   end
 
   def personify
@@ -21,7 +38,7 @@ class QueueController < ApplicationController
     rescue => e
       Logger.log('EXCEPTION::')
       Logger.log(e.to_yaml)
-      redirect_to action: error
+      redirect_to action: 'error'
     end
 
     QueueManager.generate_parties(Person.all, Party.all)
@@ -30,6 +47,9 @@ class QueueController < ApplicationController
   end
 
   def success
+  end
+
+  def bye
   end
 
   def error

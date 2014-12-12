@@ -4,7 +4,13 @@ Rails.application.routes.draw do
 
   get 'queue/add'
 
+  get 'queue/remove'
+
+  post 'queue/destroy'
+
   get 'queue/success'
+
+  get 'queue/bye'
 
   get 'queue/error'
 
