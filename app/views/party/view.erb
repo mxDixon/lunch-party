@@ -1,7 +1,19 @@
-<h1>Your party has been arranged!</h1>
-<h3>Please wait for everyone to confirm.</h3>
-<ul>
-<% @party.people.each do |p| %>
-    <li><%= p.name %> has <%= if p.ready?; 'confirmed.'; else 'not responded.'; end %></li>
-<% end %>
-</ul>
+<div class="container">
+  <div class="page-header">
+    <h1>Your party has been arranged! <small>The meal of choice is <%= FoodCats.catlist[@party.preference][0] %>.</small></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="bs-callout">
+        <h4>Please wait for everyone to confirm.</h4>
+
+        <ul class="list-group">
+          <% @party.people.each do |p| %>
+              <% if p.ready?; glyf = 'fa fa-check green'; else glyf = 'fa fa-question red'; end%>
+              <li class="list-group-item"><i class="<%= glyf %>">&nbsp;&nbsp;</i><%= p.name %> has <%= if p.ready?; 'confirmed.'; else 'not responded.'; end %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

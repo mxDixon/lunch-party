@@ -1,3 +1,6 @@
+require 'foodcats'
+require 'queue_manager'
+
 class PartyController < ApplicationController
 
   def view

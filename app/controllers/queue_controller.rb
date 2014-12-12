@@ -24,10 +24,10 @@ class QueueController < ApplicationController
       redirect_to action: 'bye'
     rescue ActiveRecord::RecordNotUnique
       redirect_to action: 'add', alert: 'That user is already in queue!'
-    # rescue => e
-    #   logger.error 'EXCEPTION::'
-    #   logger.info e.to_yaml
-    #   redirect_to action: 'error'
+    rescue => e
+      logger.error 'EXCEPTION::'
+      logger.info e.to_yaml
+      redirect_to action: 'error'
     end
   end
 
@@ -39,7 +39,7 @@ class QueueController < ApplicationController
       peep.name = params[:person][:name]
       peep.save!
 
-      QueueManager.generate_parties(Person.all, Party.all)
+      # QueueManager.generate_parties(Person.all, Party.all)
 
       redirect_to action: 'success'
     rescue ActiveRecord::RecordNotUnique => e
