@@ -18,11 +18,11 @@
 # end
 
 every 10.minutes do
-  runner QueueManager.clear_and_generate
+  runner 'QueueManager.clear_and_generate'
 end
 
-every 7.minutes do
-  runner QueueManager.timeout_parties
+every '7-59/10 * * * *' do
+  runner 'QueueManager.timeout_parties'
 end
 
 # Learn more: http://github.com/javan/whenever
