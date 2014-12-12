@@ -1,5 +1,6 @@
 <h1>Welcome to Lunchparty Hub</h1>
-<p>There are currently <%= Person.count %> people in queue.</p>
+<% count = Person.count %>
+<p>There are currently <%= count.to_s + ' person'.pluralize(count) %> in queue.</p>
 <br/>
 <p>If you would like to join, click <%= link_to 'here', controller: 'queue', action: 'add' %>.</p>
 <br/>

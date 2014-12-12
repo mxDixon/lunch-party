@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  attr_accessor :name
   validates_uniqueness_of :name
 
 	serialize :preferences, Array

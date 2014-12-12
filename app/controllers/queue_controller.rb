@@ -32,18 +32,23 @@ class QueueController < ApplicationController
       peep = Person.new
       peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
       peep.name = params[:person][:name]
-      peep.save
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to action: 'add', alert: 'That user is already in queue!'
+      puts peep.to_yaml
+      peep.save!
+
+      QueueManager.generate_parties(Person.all, Party.all)
+
+      redirect_to action: 'success'
+    rescue ActiveRecord::RecordNotUnique => e
+      flash[:notice] = 'That user is already in queue!'
+      redirect_to action: 'add'
+    rescue ActiveRecord::RecordInvalid => e
+      flash[:notice] = 'That user is already in queue!'
+      redirect_to action: 'add'
     rescue => e
-      Logger.log('EXCEPTION::')
-      Logger.log(e.to_yaml)
+      logger.error 'EXCEPTION::'
+      logger.info e.to_yaml
       redirect_to action: 'error'
     end
-
-    QueueManager.generate_parties(Person.all, Party.all)
-
-    redirect_to action: 'success'
   end
 
   def success
