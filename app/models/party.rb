@@ -1,7 +1,7 @@
 class Party < ActiveRecord::Base
 	has_many :people
 
-  attr_reader :ready, :zombies
+  attr_reader :zombies
 
   def max_size
     #people.max_by(|person| person.seats)
@@ -44,7 +44,6 @@ class Party < ActiveRecord::Base
     end
 
     if peeps_ready == people.length
-      @ready = true
       kill_the_people
       self.status = 'ready'
       self.save

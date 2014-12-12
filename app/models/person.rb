@@ -7,4 +7,10 @@ class Person < ActiveRecord::Base
     self.has_confirmed
   end
 
+  def unassign
+    self.assigned = false
+    self.party_id = nil
+    self.has_confirmed = false
+  end
+
 end

@@ -1,5 +1,15 @@
 class QueueManager
 
+  def self.clear_and_generate
+    Person.all.each do |p|
+      p.unassign
+    end
+
+    Party.destroy_all
+
+    self.generate_parties(Person.all, Party.all)
+  end
+
   def self.generate_parties(unassigned_people, existing_parties, pref = 0)
     people = unassigned_people
     parties = existing_parties
@@ -42,7 +52,29 @@ class QueueManager
     end
   end
 
+  def self.timeout_parties
+    Party.all.each do |p|
+      boot_lames(p)
+
+      if p.happy? && p.check_ready
+        HipchatMessenger.leave_now(p)
+      else
+        HipchatMessenger.requeue(p)
+        p.people.each do |peep|
+          peep.unassign
+        end
+        p.destroy
+      end
+    end
+  end
+
   private
+
+  def self.boot_lames(party)
+    party.people.each do |p|
+      p.destroy unless p.ready?
+    end
+  end
 
   def self.refine_orphans
 

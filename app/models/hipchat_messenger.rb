@@ -22,6 +22,15 @@ class HipchatMessenger
     # end
   end
 
+  def self.requeue(party)
+    # party.people.each do |p|
+    #   response = HTTParty.post("https://consumerprofile.hipchat.com/v2/user/#{p.name}/message?auth_token=MuE1Ln34HkOgQ9SFIqynMbgBMrjGg3PVnrtLJrCb",
+    #                            :body => self.requeue_message,
+    #                            :headers => {'content-type' => 'text/plain'}
+    #   )
+    #   puts "#{p} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
+    # end
+  end
   private
 
   def self.ready_message(party, person)
@@ -30,5 +39,9 @@ class HipchatMessenger
 
   def self.leave_message
     "Everyone has confirmed in your party! Meet at the LL elevator to embark!"
+  end
+
+  def self.requeue_message
+    "Not enough people in your party have confirmed the invitation, so you will return to the queue."
   end
 end
