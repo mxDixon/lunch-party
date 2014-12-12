@@ -1,9 +1,15 @@
-<h1>Enter your HipChat @id</h1>
-<%= form_tag '/queue/destroy', :name => 'idForm', :onsubmit => 'return validateId()' do %>
-    <%= text_field(:person, :name, size: 20) %>
-    <br/>
-    <%= submit_tag 'Remove' %>
-<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Remove user from queue</h1>
+  </div>
+  <%= form_tag({:controller => :queue, :action => :destroy}, {:name => 'idForm', :onsubmit => 'return validateId()', role: 'form'}) do %>
+      <div class="form-group">
+        <label for="person_name">Hipchat @username</label>
+        <%= text_field(:person, :name, size: 20) %>
+      </div>
+      <%= submit_tag('Remove', class: 'btn btn-danger') %>
+  <% end %>
+</div>
 
 
 <script>
