@@ -32,7 +32,7 @@ class QueueManager
 
     Party.all.each do |p|
       if p.happy?
-        puts "should be sending ready msg"
+        puts "party #{p.id} is happy and should be sending ready msg"
         HipchatMessenger.party_ready(p)
       end
       puts "party #{p.id}"

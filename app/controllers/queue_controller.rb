@@ -5,23 +5,28 @@ class QueueController < ApplicationController
   def index
   end
 
-  def personify
-    #todo do the person create and enqueue
-    pref = params[:person]
-    peep = Person.new
-    peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
-    peep.name = params[:person][:name]
-    peep.save
+  def add
 
-    error = false
+  end
+
+  def personify
+    begin
+      pref = params[:person]
+      peep = Person.new
+      peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
+      peep.name = params[:person][:name]
+      peep.save
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to action: 'add', alert: 'That user is already in queue!'
+    rescue => e
+      Logger.log('EXCEPTION::')
+      Logger.log(e.to_yaml)
+      redirect_to action: error
+    end
 
     QueueManager.generate_parties(Person.all, Party.all)
 
-    if error
-      redirect_to action: 'error'
-    else
-      redirect_to action: 'success'
-    end
+    redirect_to action: 'success'
   end
 
   def success
