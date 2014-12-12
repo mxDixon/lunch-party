@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'queue#index', as: '/'
 
+  get 'queue/generate'
+
   get 'queue/add'
 
   get 'queue/remove'

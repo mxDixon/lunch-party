@@ -11,6 +11,11 @@ class QueueController < ApplicationController
   def remove
   end
 
+  def generate
+    QueueManager.clear_and_generate
+    redirect_to action: index
+  end
+
   def destroy
     begin
       peeps = Person.where(name: params[:person][:name])
