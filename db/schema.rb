@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141211230600) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "parties", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -33,6 +36,6 @@ ActiveRecord::Schema.define(version: 20141211230600) do
     t.boolean  "has_confirmed"
   end
 
-  add_index "people", ["party_id"], name: "index_people_on_party_id"
+  add_index "people", ["party_id"], name: "index_people_on_party_id", using: :btree
 
 end
