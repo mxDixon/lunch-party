@@ -8,10 +8,11 @@ class Person < ActiveRecord::Base
   end
 
   def unassign
-    self.assigned = false
-    self.party_id = nil
-    self.has_confirmed = false
-    save
+    peep = Person.find(self.id)
+    peep.assigned = false
+    peep.party_id = nil
+    peep.has_confirmed = false
+    peep.save
   end
 
 end
