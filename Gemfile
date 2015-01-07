@@ -35,7 +35,7 @@ gem 'lograge'
 
 gem 'httparty'
 
-gem 'whenever'
+gem 'clockwork'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
