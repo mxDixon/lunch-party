@@ -1,9 +1,7 @@
 class QueueManager
 
   def self.clear_and_generate
-    puts "============================================================================="
     puts "======================  Fresh party generation  ============================="
-    puts "============================================================================="
 
     Person.all.each do |p|
       p.unassign
@@ -28,9 +26,7 @@ class QueueManager
       else
         prt = Party.new
         prt.preference = person.preferences[pref]
-        puts "adding #{person.name} to party #{prt.id}"
         prt.add(person)
-        puts "party people after: #{prt.people.to_yaml}"
         parties << prt
       end
     end
@@ -83,7 +79,6 @@ class QueueManager
       generate_parties(sadboys, Party.all, pref+1)
     else
       last_resort(sadboys)
-      puts "blasting"
       blast
     end
   end
@@ -95,7 +90,6 @@ class QueueManager
       parties.map! do |p|
         p if p.people.length < p.max_size
       end.compact
-      puts "matched parties for last resort #{parties.to_yaml}"
 
       parties.first.add(sb) if parties.length > 0
     end
@@ -104,12 +98,7 @@ class QueueManager
   def self.blast
     Party.all.each do |p|
       if p.happy?
-        puts "party #{p.id} is happy and should be sending ready msg"
         HipchatMessenger.party_ready(p)
-      end
-      puts "party #{p.id}"
-      p.people.each do |n|
-        puts "#{n.name} #{n.id}"
       end
     end
   end
