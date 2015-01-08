@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'queue/add'
 
-  post 'queue/add' => 'queue#personify'
+  post 'queue/add' => 'queue#create_person'
 
   get 'queue/remove'
 
