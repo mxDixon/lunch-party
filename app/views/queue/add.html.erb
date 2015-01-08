@@ -5,9 +5,9 @@
 
   <%= simple_form_for :person do |f| %>
       <%= f.input :name, label: 'Hipchat @id' %>
-      <%= f.input :first, collection: FoodCats.catlist, label: 'First choice.'%>
-      <%= f.input :second, collection: FoodCats.catlist, label: 'Second choice.' %>
-      <%= f.input :third, collection: FoodCats.catlist, label: 'Third choice.' %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'First choice.', input_html: { name: 'person[preferences][]' } %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Second choice.', input_html: { name: 'person[preferences][]' } %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Third choice.', input_html: { name: 'person[preferences][]' } %>
       <%= f.button :submit, value: 'Queue', class: 'btn btn-primary' %>
   <% end %>
 </div>
