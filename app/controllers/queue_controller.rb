@@ -30,15 +30,9 @@ class QueueController < ApplicationController
     end
   end
 
-  def personify
+  def create_person
     begin
-      pref = params[:person]
-      peep = Person.new
-      peep.preferences = [pref[:pref1].to_i, pref[:pref2].to_i, pref[:pref3].to_i]
-      peep.name = params[:person][:name]
-      peep.save!
-
-      # QueueManager.generate_parties(Person.all, Party.all)
+      Person.create(person_params)
 
       redirect_to action: 'success'
     rescue ActiveRecord::RecordNotUnique => e
@@ -62,4 +56,11 @@ class QueueController < ApplicationController
 
   def error
   end
+
+  private
+
+  def person_params
+    params.require(:person).permit(:name, preferences: [])
+  end
+
 end
