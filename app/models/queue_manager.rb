@@ -50,6 +50,12 @@ class QueueManager
     end
   end
 
+  def self.day_close
+    HipchatMessenger.day_close(Person.all)
+    Party.destroy_all
+    Person.destroy_all
+  end
+
   private
 
   def self.boot_lames(party)

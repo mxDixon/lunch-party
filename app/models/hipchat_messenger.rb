@@ -8,7 +8,7 @@ class HipchatMessenger
                                :body => self.ready_message(party, peep),
                                :headers => {'content-type' => 'text/plain'}
       )
-      puts "#{peep} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
+      puts "#{peep} missed a message " + response.request.to_yaml + ' ' + response.to_yaml if response.code != 204
     end
   end
 
@@ -18,7 +18,7 @@ class HipchatMessenger
                                :body => self.leave_message,
                                :headers => {'content-type' => 'text/plain'}
       )
-      puts "#{z} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
+      puts "#{z} missed a message " + response.request.to_yaml + ' ' + response.to_yaml if response.code != 204
     end
   end
 
@@ -28,9 +28,24 @@ class HipchatMessenger
                                :body => self.requeue_message,
                                :headers => {'content-type' => 'text/plain'}
       )
-      puts "#{p} missed a message " + response.request.to_yaml +  " " + response.to_yaml if response.code != 204
+      puts "#{p} missed a message " + response.request.to_yaml + ' ' + response.to_yaml if response.code != 204
     end
   end
+
+  def self.day_close(people)
+    people.each do |p|
+      response = HTTParty.post("https://consumerprofile.hipchat.com/v2/user/#{p.name}/message?auth_token=MuE1Ln34HkOgQ9SFIqynMbgBMrjGg3PVnrtLJrCb",
+                               :body => self.day_close_message,
+                               :headers => {'content-type' => 'text/plain'}
+      )
+      puts "#{p} missed a message " + response.request.to_yaml + ' ' + response.to_yaml if response.code != 204
+    end
+  end
+
+  def self.validate(uid)
+
+  end
+
   private
 
   def self.ready_message(party, person)
@@ -38,10 +53,14 @@ class HipchatMessenger
   end
 
   def self.leave_message
-    "Everyone has confirmed in your party! Meet at the LL elevator to embark!"
+    'Everyone has confirmed in your party! Meet at the LL elevator to embark!'
   end
 
   def self.requeue_message
-    "Not enough people in your party have confirmed the invitation, so you will return to the queue."
+    'Not enough people in your party have confirmed the invitation, so you will return to the queue.'
+  end
+
+  def self.day_close_message
+    'Lunchparty is done for the day! Lunch time is over. Better luck next time.'
   end
 end
