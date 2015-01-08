@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'queue/add'
 
+  post 'queue/add' => 'queue#personify'
+
   get 'queue/remove'
 
   post 'queue/destroy'
@@ -15,8 +17,6 @@ Rails.application.routes.draw do
   get 'queue/bye'
 
   get 'queue/error'
-
-  post 'queue/personify'
 
   get 'party/:id' => 'party#view'
 
