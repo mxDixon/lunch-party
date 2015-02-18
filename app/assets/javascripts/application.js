@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require rapscallion/validations
 //= require turbolinks
+//= require twitter/bootstrap
 //= require_tree .
 
 // FLASH NOTICE ANIMATION

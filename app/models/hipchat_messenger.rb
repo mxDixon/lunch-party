@@ -42,10 +42,6 @@ class HipchatMessenger
     end
   end
 
-  def self.validate(uid)
-
-  end
-
   private
 
   def self.ready_message(party, person)
