@@ -11,11 +11,11 @@ module ApplicationHelper
 
   def icon_class(level)
     case level
-      when "notice" then "glyphicon glyphicon-info-sign"
-      when "success" then "glyphicon glyphicon-ok-sign"
-      when "warning" then "glyphicon glyphicon-exclamation-sign"
-      when "error" then "glyphicon glyphicon-exclamation-sign"
-      when "alert" then "glyphicon glyphicon-exclamation-sign"
+      when "notice" then "fa fa-info"
+      when "success" then "fa fa-check"
+      when "warning" then "fa fa-exclamation-triangle"
+      when "error" then "fa fa-exclamation"
+      when "alert" then "fa fa-exclamation-triangle"
     end
   end
 end

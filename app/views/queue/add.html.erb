@@ -3,11 +3,11 @@
     <h1>Select your top food picks</h1>
   </div>
 
-  <%= simple_form_for :person do |f| %>
+  <%= simple_form_for :person, html: {:onsubmit => 'return validateId()'} do |f| %>
       <%= f.input :name, label: 'Hipchat @id' %>
-      <%= f.input :preferences, collection: FoodCats.catlist, label: 'First choice.', input_html: { name: 'person[preferences][]' } %>
-      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Second choice.', input_html: { name: 'person[preferences][]' } %>
-      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Third choice.', input_html: { name: 'person[preferences][]' } %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'First choice.', include_blank: false, input_html: { name: 'person[preferences][]'} %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Second choice.', include_blank: false, input_html: { name: 'person[preferences][]'} %>
+      <%= f.input :preferences, collection: FoodCats.catlist, label: 'Third choice.', include_blank: false, input_html: { name: 'person[preferences][]'} %>
       <%= f.button :submit, value: 'Queue', class: 'btn btn-primary' %>
   <% end %>
 </div>

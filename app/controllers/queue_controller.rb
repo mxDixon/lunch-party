@@ -32,9 +32,13 @@ class QueueController < ApplicationController
 
   def create_person
     begin
-      Person.create(person_params)
+      person = Person.create(person_params)
 
-      redirect_to action: 'success'
+      if person.valid?
+        redirect_to action: 'success'
+      else
+        redirect_to :back, :flash => { :error => person.errors.full_messages[0] }
+      end
     rescue ActiveRecord::RecordNotUnique => e
       flash[:notice] = 'That user is already in queue!'
       redirect_to action: 'add'
